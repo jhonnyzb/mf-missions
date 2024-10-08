@@ -1,0 +1,36 @@
+<div class="survey-participate">
+  <div class="survey-container">
+    <div class="survey-container__button-divider" (click)="goBack()">
+      <div class="survey-container__button-content">
+        <mat-icon>chevron_left</mat-icon>
+        <span class="bold-16 white">Detalle de la misión</span>
+      </div>
+    </div>
+    <div class="survey-container__grid">
+      <div class="survey-container__grid-colums">
+        <div class="survey-container__grid-colum">
+          <span class="bold-16 primary">Actividad {{activityNumber}}</span>
+          <div class="survey-container__mision-imagen">
+            <img [src]="mission.image" class="survey-container__img" alt="completa-misiones">
+          </div>
+        </div>
+        <div class="survey-content">
+          <div class="survey-content__mision-header  mb-3">
+    
+              <div class="survey-content__icon">
+                <mat-icon class="material-symbols-outlined">
+                  description
+                </mat-icon>
+              </div>
+            <div class="survey-content__mission-name">
+              <span class="bold-24 primary">{{mission.name}}</span>
+            </div>
+          </div>
+          <div class="activity-content">
+            <iframe style=" width:100%;" [src]="url" id="iFrame1" title="image-surveys"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

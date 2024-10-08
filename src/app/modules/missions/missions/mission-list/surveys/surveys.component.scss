@@ -1,0 +1,128 @@
+.survey-participate {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.survey-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 20px 0 60px;
+    height: 100%;
+
+    &__button-divider {
+        border-radius: 22px;
+        background-color: var(--ngx-valepro-color-primary);
+        height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__button-content {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        mat-icon {
+            color: var(--color-white);
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-top: 1rem;
+    }
+
+    &__grid-colums {
+        margin-bottom: 2rem;
+        grid-template-columns: 1fr;
+        display: grid;
+    }
+
+    &__mision-imagen {
+        margin-top: 1rem;
+        max-width: 636px;
+        width: 100%;
+        max-height: 477px;
+        background-color: rgba(243, 243, 243, 0.527);
+    }
+
+    &__img {
+        width: 100%;
+    }
+}
+
+.survey-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+
+    &__mision-header {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: 2rem 0 3.3rem;
+    }
+
+    &__icon {
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0px 0px 2px #00000029;
+        width: 26px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-right: 1rem;
+
+        mat-icon {
+            color: var(--ngx-valepro-color-secondary40);
+            font-size: 24px;
+        }
+    }
+
+    &__mission-name {
+        padding-left: 2%;
+        color: var(--ngx-valepro-color-tertiary);
+    }
+}
+
+.activity-content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2.5rem;
+
+    iframe {
+        min-height: 450px;
+    }
+}
+
+//Tablet
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .survey-container {
+        &__grid-colums {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .survey-content {
+        margin-left: 24px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .survey-container {
+        &__grid-colums {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .survey-content {
+        margin-left: 24px;
+    }
+}

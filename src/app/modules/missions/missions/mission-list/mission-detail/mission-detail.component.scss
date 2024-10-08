@@ -1,0 +1,137 @@
+.details-mission {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    width: 1400px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  &__bar {
+    align-items: center;
+    background-color: var(--ngx-valepro-color-primary);
+    border-radius: 22px;
+    display: flex;
+    height: 44px;
+    padding-left: 15px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__activity {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__imagen {
+    height: auto;
+    margin-top: 10px;
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+  }
+
+  &__title {
+    display: flex;
+    margin-bottom: 15px;
+  }
+
+  &__icon {
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0px 0px 6px #00000029;
+    display: flex;
+    height: 56px;
+    justify-content: center;
+    margin-right: 15px;
+    min-width: 56px;
+
+    &--custom {
+      color: var(--ngx-valepro-color-secondary);
+      font-size: 24px;
+    }
+  }
+
+  &__name {
+    align-items: center;
+    display: flex;
+  }
+
+  &__todo {
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0px 0px 6px #00000029;
+    cursor: pointer;
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    margin-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    &--complete {
+      justify-content: unset;
+    }
+  }
+
+  &__panel {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    max-height: 0;
+    overflow: hidden;
+
+    &--show {
+      max-height: 500px;
+    }
+
+  }
+
+  &__refresh {
+    align-items: center;
+    background-color: var(--ngx-valepro-color-tertiary);
+    border-radius: 50px;
+    display: flex;
+    height: 32px;
+    justify-content: center;
+    width: 32px;
+    margin-right: 5px;
+  }
+
+  &__validate {
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+@media screen and (min-width: 768px) {
+  .details-mission {
+    &__content {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    &__activity {
+      width: 49%;
+      margin-bottom: unset;
+    }
+
+    &__description {
+      width: 49%;
+      padding-top: 40px;
+    }
+  }
+}
+
+.white {
+  color: var(--color-white);
+}

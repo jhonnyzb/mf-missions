@@ -1,0 +1,53 @@
+<div class="details-mission">
+  <div class="details-mission__container">
+    <div class="details-mission__bar">
+      <span class="bold-16 primary">Detalle de la misión</span>
+    </div>
+    <div class="details-mission__content">
+      <div class="details-mission__activity">
+        <span class="bold-16 primary">Actividad {{activityNumber}}</span>
+        <img class="details-mission__imagen"
+          [src]="mission.image"
+          alt="completa-misiones">
+      </div>
+      <div class="details-mission__description">
+        <div class="details-mission__title">
+          <div class="details-mission__icon">
+            <mat-icon class="details-mission__icon--custom" *ngIf="activity.iconClass === 'photo-class-ico'">photo_camera</mat-icon>
+            <mat-icon class="details-mission__icon--custom" *ngIf="activity.iconClass === 'poll-class-ico'">insert_drive_file</mat-icon>
+          </div>
+          <div class="details-mission__name">
+            <span class="bold-24 primary">{{ mission.name }}</span>
+          </div>
+        </div>
+        <div class="details-mission__todo" (click)="changePanelToDo()">
+          <span class="regular-16 primary">¿Qué debes hacer?</span>
+          <mat-icon *ngIf="!showPanelToDo" class="details-mission__icon--custom">keyboard_arrow_down</mat-icon>
+          <mat-icon *ngIf="showPanelToDo"class="details-mission__icon--custom">keyboard_arrow_up</mat-icon>
+        </div>
+        <div [ngClass]="{'details-mission__panel': true, 'details-mission__panel--show': showPanelToDo}"
+          class="regular-14 primary">
+          {{ activity.description }}
+        </div>
+        <div class="details-mission__todo" (click)="changePanelTerm()">
+          <span class="regular-16 primary">Términos y condiciones</span>
+          <mat-icon *ngIf="!showPanelTerm" class="details-mission__icon--custom">keyboard_arrow_down</mat-icon>
+          <mat-icon *ngIf="showPanelTerm"class="details-mission__icon--custom">keyboard_arrow_up</mat-icon>
+        </div>
+        <div [ngClass]="{'details-mission__panel': true, 'details-mission__panel--show': showPanelTerm}"
+          class="regular-14 primary">
+          {{ activity.termsAndConditions }}
+        </div>
+        <div class="details-mission__todo details-mission__todo--complete" (click)="completeMission()">
+          <div class="details-mission__refresh">
+            <mat-icon class="details-mission__icon--custom">loop</mat-icon>
+          </div>
+          <div class="details-mission__validate">
+            <span class="regular-12 primary">Misión en validación</span>
+            <span class="bold-16 primary">Participa y gana aquí</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<div *ngFor="let mission of noActiveMission" class="missions-card__container">
+    <div *ngIf="mission.missionActivities.length > 0" class="missions-card">
+      <div class="missions-card__date">
+        <div class="missions-card__date-header">
+          <span class="bold-12 primary uppercase">VENCE {{mission.vencimiento }}</span>
+        </div>
+        <div class="missions-card__content">
+          <div class="missions-card__icons">
+            <div class="missions-card__icon">
+              <mat-icon *ngIf="mission.missionActivities[0].missionTypeId==1" class="material-symbols-outlined">
+                photo_camera
+              </mat-icon>
+              <mat-icon
+                *ngIf="mission.missionActivities[0].missionTypeId==2 || mission.missionActivities.length > 1"
+                class="material-symbols-outlined">
+                description
+              </mat-icon>
+            </div>
+          </div>
+          <div class="missions-card__row">
+            <div class="missions-card__data">
+              <div class="bold-16 missions-card__text">{{mission.name}}</div>
+              <div *ngIf="mission.missionActivities.length == 1">
+                <div *ngIf="mission.missionActivities[0].missionTypeId==1"
+                  class="missions-card__text regular-14">Misión foto:</div>
+                <div *ngIf="mission.missionActivities[0].missionTypeId==2"
+                  class="missions-card__text regular-14">Misión encuesta:</div>
+                <div *ngIf="mission.missionActivities[0].missionTypeId==4"
+                  class="missions-card__text regular-14">Misión audio:</div>
+                <div *ngIf="mission.missionActivities[0].missionTypeId==5"
+                  class="missions-card__text regular-14">Misión video:</div>
+              </div>
+              <div *ngIf="mission.missionActivities.length > 1">
+                <div class="missions-card__text regular-14">Misión foto/encuesta:</div>
+              </div>
+              <div class="regular-14 missions-card__text missions-card__text--mb">Gana {{mission.totalAward}}
+                puntos</div>
+              <div class="missions-card__content-label">
+                <div
+                  *ngIf="mission.missionActivities.length > 1 && (!mission.participationStatusPhoto || !mission.participationStatusSurvey)"
+                  class="missions-card__label missions-card__label--pending bold-12 primary">
+                  Actividades pendientes
+                </div>
+                <div
+                  *ngIf="mission.missionActivities.length == 1 && (mission.missionActivities[0].missionTypeId == 2 && !mission.participationStatusSurvey)"
+                  class="missions-card__label missions-card__label--pending bold-12 primary">
+                  Actividades pendientes
+                </div>
+                <div
+                  *ngIf="mission.missionActivities.length == 1 && (mission.missionActivities[0].missionTypeId == 1 && !mission.participationStatusPhoto)"
+                  class="missions-card__label missions-card__label--pending bold-12 primary">
+                  Actividades pendientes
+                </div>
+                <div
+                  *ngIf="mission.missionActivities.length > 1 && (mission.participationStatusPhoto || mission.participationStatusSurvey)"
+                  class="missions-card__label missions-card__label--approved bold-12 primary">
+                  Actividad terminada
+                </div>
+                <div
+                  *ngIf="mission.missionActivities.length == 1 && (mission.missionActivities[0].missionTypeId == 2 && mission.participationStatusSurvey)"
+                  class="missions-card__label missions-card__label--approved bold-12 primary">
+                  Actividad terminada
+                </div>
+                <div
+                  *ngIf="mission.missionActivities.length == 1 && (mission.missionActivities[0].missionTypeId == 1 && mission.participationStatusPhoto)"
+                  class="missions-card__label missions-card__label--approved bold-12 primary">
+                  Actividad terminada
+                </div>
+              </div>
+            </div>
+            <div class="missions-card__qualify missions-card__qualify--only-one"
+              *ngIf="mission.missionActivities.length == 1">
+              <div class="bold-14 missions-card__text p-right">Calificación:</div>
+
+              <div class="missions-card__content-label">
+                <div class="missions-card__label missions-card__label--approve bold-12 primary"
+                  *ngIf="mission.participationStatusPhoto?.includes('APROBAR') || mission.participationStatusSurvey?.includes('APROBAR')">
+                  Por aprobar
+                </div>
+                <div class="missions-card__label missions-card__label--approved w-approved bold-12 primary"
+                  *ngIf="mission.participationStatusPhoto?.includes('APROBADO') || mission.participationStatusSurvey?.includes('APROBADO')">
+                  APROBADA
+                </div>
+                <div class="missions-card__label missions-card__label--rejected bold-12 primary"
+                  *ngIf="mission.participationStatusPhoto?.includes('RECHAZADO') || mission.participationStatusSurvey?.includes('RECHAZADO')">
+                  RECHAZADA
+                </div>
+              </div>
+            </div>
+            <div class="missions-card__qualify" *ngIf="mission.missionActivities.length > 1">
+              <div class="missions-card__t-qualify">
+                <div class="bold-14 missions-card__text p-right">Calificación:</div>
+              </div>
+              <div class="missions-card__content-label">
+                <div class="missions-card__row-label">
+                  <div class="missions-card__col-label">
+                    <div
+                      *ngIf="mission.participationStatusPhoto?.includes('APROBAR') || mission.participationStatusPhoto?.includes('APROBADO') || mission.participationStatusPhoto?.includes('RECHAZADO')"
+                      class="missions-card__text regular-14 m-right">Foto </div>
+                    <div class="missions-card__label missions-card__label--approve bold-12 primary"
+                      *ngIf="mission.participationStatusPhoto?.includes('APROBAR')">
+                      Por aprobar
+                    </div>
+                    <div class="missions-card__label missions-card__label--approved w-approved bold-12 primary"
+                      *ngIf="mission.participationStatusPhoto?.includes('APROBADO')">
+                      APROBADA
+                    </div>
+                    <div class="missions-card__label missions-card__label--rejected bold-12 primary"
+                      *ngIf="mission.participationStatusPhoto?.includes('RECHAZADO')">
+                      RECHAZADA
+                    </div>
+                  </div>
+                  <div class="missions-card__col-label">
+                    <div
+                      *ngIf="mission.participationStatusSurvey?.includes('APROBAR') || mission.participationStatusSurvey?.includes('APROBADO') || mission.participationStatusSurvey?.includes('RECHAZADO')"
+                      class="missions-card__text regular-14 m-right">Encuesta </div>
+                    <div class="missions-card__label missions-card__label--approve bold-12 primary"
+                      *ngIf="mission.participationStatusSurvey?.includes('APROBAR')">
+                      Por aprobar
+                    </div>
+                    <div class="missions-card__label missions-card__label--approved w-approved bold-12 primary"
+                      *ngIf="mission.participationStatusSurvey?.includes('APROBADO')">
+                      APROBADA
+                    </div>
+                    <div class="missions-card__label missions-card__label--rejected bold-12 primary"
+                      *ngIf="mission.participationStatusSurvey?.includes('RECHAZADO')">
+                      RECHAZADA
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>

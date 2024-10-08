@@ -1,0 +1,32 @@
+<div class="containerDialogMission">
+
+  <div class="containerDialogMission__contenIcon" (click)="closeDialog()">
+  </div>
+  <mat-icon class="containerDialogMission__icon">close</mat-icon>
+
+
+
+
+  <div class="containerDialogMission__image">
+    <img class="containerDialogMission__image-icons" [src]="dialogIcon" alt="">
+  </div>
+
+
+  <div class="containerDialogMission__text bold-32 primary">
+    {{data.message}}
+  </div>
+
+
+  <div class="containerDialogMission__buttons" mat-dialog-actions>
+
+    <div class="containerDialogMission__buttons-cancel  button" fooButton *ngIf="checkRouteUrl()"
+      (click)="closeDialog()">
+      <span class="bold-16 primary">Cancelar</span>
+    </div>
+
+    <div class="containerDialogMission__buttons-confirm button" fooButton (click)="confirmado()"> <span
+        class="bold-16 primary">{{confirmText}}</span>
+    </div>
+
+  </div>
+</div>

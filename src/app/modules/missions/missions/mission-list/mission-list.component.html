@@ -1,0 +1,95 @@
+<div class="overlay" *ngIf="showDropdown" (window:scroll)="onScroll()">
+  <div class="block-point" id="blockPoint"></div>
+</div>
+<div class="container-order" *ngIf="showDropdown">
+  <div class="container-order__content">
+    <em class="icon-close" (click)="close()"><mat-icon>close</mat-icon></em>
+    <div class="container-order__buttons">
+      <div class="missions-container__btn_order">
+        <p class="bold-16 primary">Ordenar
+        </p>
+      </div>
+      <div class="missions-container__btn_order" (click)="orderNumber = 2">
+        <p class="regular-16 primary">Más reciente
+        </p>
+        <mat-icon class="material-symbols-outlined" [ngClass]="{'transparent': orderNumber != 2}">check</mat-icon>
+      </div>
+      <div class="missions-container__btn_order" (click)="orderNumber = 1">
+        <p class="regular-16 primary">Menos reciente
+        </p>
+        <mat-icon class="material-symbols-outlined" [ngClass]="{'transparent': orderNumber != 1}">check</mat-icon>
+      </div>
+    </div>
+    <div class="btn-order">
+      <button class="btn-order__button bold-16" (click)="order(orderNumber)">Cambiar orden</button>
+    </div>
+  </div>
+
+</div>
+<div class="mission-list">
+  <div class="missions-container">
+    <div class="missions-container__button-divider">
+      <div class="buttonBarHeader">
+        <span class="bold-16 primary">Misiones</span>
+      </div>
+    </div>
+    <div class="missions-container__grid">
+      <div class="missions-container__grid-colum">
+        <div class="missions-container__img">
+          <img alt="img-list-missions" src="../../../../../assets/missions-list.png">
+        </div>
+        <!-- filtros menor mayor -->
+        <div class="missions-container__order">
+          <div class="missions-container__content-btn">
+            <div class="missions-container__btn_order">
+              <p class="bold-16 primary">Ordenar
+              </p>
+            </div>
+            <div class="missions-container__btn_order" (click)="order(orderNumber = 2)">
+              <p class="regular-16 primary">Más reciente
+              </p>
+              <mat-icon class="material-symbols-outlined" [ngClass]="{'transparent': orderNumber != 2}">check</mat-icon>
+            </div>
+            <div class="missions-container__btn_order" (click)="order(orderNumber = 1)">
+              <p class="regular-16 primary">Menos reciente
+              </p>
+              <mat-icon class="material-symbols-outlined" [ngClass]="{'transparent': orderNumber != 1}">check</mat-icon>
+            </div>
+          </div>
+        </div>
+        <!-- fin filtros menor mayor -->
+      </div>
+      <div class="missions-container__grid-colum--two">
+        <div class="col-lg-8 missions-container__list">
+          <div class="missions-container__buttons-select">
+            <div class="missions-container__btn-select">
+              <button type="button" class="missions-container__btn"
+                [ngClass]="{'missions-container__btn--active': isActiveButton, 'missions-container__btn--off': !isActiveButton}"
+                (click)="toggleButtons(true)"> <span class="regular-16">Misiones activas</span>
+              </button>
+              <button type="button" class="missions-container__btn"
+                [ngClass]="{'missions-container__btn--active': !isActiveButton, 'missions-container__btn--off': isActiveButton}"
+                (click)="toggleButtons(false)"> <span class="regular-16">Misiones inactivas</span>
+              </button>
+            </div>
+            <div class="missions-container__btn-order">
+              <button type="button" class="missions-container__btn-content bold-16 primary" (click)="onClick()">
+                Ordenar <mat-icon class="material-symbols-outlined">filter_list</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="isActiveButton" class="missions-container__cards">
+            <!-- Missiones activas-->
+            <app-active-missions [active]="isActiveButton" [asc]="ascendent"></app-active-missions>
+          </div>
+          <div *ngIf="!isActiveButton" class="missions-container__cards">
+            <!-- Missiones inactivas  -->
+            <app-inactive-missions [active]="isActiveButton" [asc]="ascendent"></app-inactive-missions>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

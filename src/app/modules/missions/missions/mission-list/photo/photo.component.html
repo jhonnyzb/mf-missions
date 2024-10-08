@@ -1,0 +1,115 @@
+<div class="photo-participate">
+  <div class="photo-container">
+    <div class="photo-container__button-divider">
+      <div class="photo-container__button-content">
+        <span class="bold-16 primary">Detalle de la misión</span>
+      </div>
+    </div>
+    <div class="photo-container__grid">
+      <div class="photo-container__grid-colums">
+        <div class="photo-container__grid-colum">
+          <span class="bold-16 primary">Actividad {{activityNumber}}</span>
+          <div class="photo-container__mision-imagen">
+            <img [src]="mission.image" class="photo-container__img" alt="completa-misiones">
+          </div>
+        </div>
+        <div class="photo-content" *ngIf="!photo_loaded">
+          <div class="photo-content__mision-header  mb-3">
+    
+              <div class="photo-content__icon">
+                <mat-icon class="material-symbols-outlined">
+                  photo_camera
+                </mat-icon>
+              </div>
+            <div class="photo-content__mission-name">
+              <span class="bold-24 primary">{{mission.name}}</span>
+            </div>
+          </div>
+          <div class="activity-content">
+            <div class="activity-content__buttons">
+              <span class="bold-16 primary">Misión fotografía</span>
+              <div class="activity-content__row">
+                <mat-icon class="material-symbols-outlined activity-content__camera" (click)="acctionImg()" >photo_camera</mat-icon>
+                <button class="activity-content__btn" (click)="acctionImg()"></button>
+                <label for="file-6">
+                  <mat-icon class="material-symbols-outlined activity-content__clip">attach_file</mat-icon>
+                </label>
+                <button class="activity-content__btn" (click)="acctionphoto()">
+                  <input type="file" id="file-6" class="activity-content__input-file inputfile-6"
+                    data-multiple-caption="{count} archivos seleccionados" multiple (change)="uploadPhoto($event.target)" />
+                  <label for="file-6">
+                    <mat-icon class="material-symbols-outlined">attach_file</mat-icon>
+                  </label>
+                </button>
+              </div>
+            </div>
+            
+            <div class="mission-photo__webcam" *ngIf="takephoto">
+              <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
+                [width]="webcamProperties.Width" [height]="webcamProperties.Height">
+              </webcam>
+              <br>
+              <button class="mission-photo__btn-take primary bold-16" (click)="triggerSnapshot()">
+                Capturar
+              </button>
+            </div>                    
+          </div>
+          <div class="container-list">
+            <div class="container-list__plist" [ngClass]="{'container-list__plist--short' : activity.descriptionByPhoto }" *ngIf="activity.participateMissions[0]?.participateMissionResources.length > 0">
+              <div *ngFor="let participation of activity.participateMissions" class="container-list__galeria">
+                <div class="container-list__resource" *ngFor="let photo of participation.participateMissionResources">
+                  <mat-icon class="container-list__trash" (click)="deleteResource(photo, participation)">delete</mat-icon>
+                  <button class="container-list__delete-btn" (click)="deleteResource(photo, participation)"></button>
+                  <img [src]="photo.resourcePath" class="container-list__img" alt="Fotos misiones">
+                  <p class="container-list__text regular-14 primary" [ngClass]="{'container-list__text--none' : activity.descriptionByPhoto }" >{{photo.resourceName}} </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text" *ngIf="activity.participateMissions[0]?.participateMissionResources.length <= 0">
+            <p class="regular-16 primary">Aun no tienes
+              recursos cargados en esta misión</p>
+    
+            <div class="text__inline">
+              <span class="regular-16 primary">* Para esta actividad, debes subir como <span class="bold-16 primary">mínimo
+                  {{activity.minimumPhotos}} fotos</span> y como <span class="bold-16 primary">máximo
+                  {{activity.maximumPhotos}} fotos.</span> </span>
+            </div>
+          </div>
+          
+    
+          <div class="container-btn" [ngClass]="{'container-btn--mt' : activity.participateMissions[0]?.participateMissionResources.length > 2 }" *ngIf="activity.participateMissions[0]?.participateMissionResources.length >= 1">
+            <button class="container-btn__accept bold-16 primary" (click)="goBackAll()">Completar actividad</button>
+          </div>
+    
+    
+        </div>
+        <div class="photo-description" *ngIf="photo_loaded">
+          <span class="bold-24 primary">Foto de la misión</span>
+          <img class="photo-description__img mt-4 mb-4" [src]="tempImage" alt="imagen-photo" title="photo-image">
+          <div *ngIf="activity.descriptionByPhoto" class="cont-fotos-carga">
+            <div>
+              <p class="regular-16 primary">Agrega una descripción de tu imagen</p>
+            </div>
+            <div class="photo-description__textarea">
+              <form class="photo-description__form" [formGroup]="form">
+                <mat-form-field appearance="fill" class="photo-description__input-textarea">
+                  <mat-label>Descripción</mat-label>
+                  <textarea  formControlName="imageDescription" matInput name="imageDescription" placeholder="Descripción"></textarea>
+                  <mat-error *ngIf="form.get('imageDescription')?.hasError('required')"> * Campo obligatorio </mat-error>
+                </mat-form-field>
+              </form>
+            </div>
+          </div>
+            <div class="photo-description__buttons">
+              <div class="photo-description__btn_box ">
+                <button class="bold-16  primary" (click)="accept()">Aceptar</button>
+                <button class="bold-16  primary" (click)="cancel()">Cancelar</button>
+              </div>
+            </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

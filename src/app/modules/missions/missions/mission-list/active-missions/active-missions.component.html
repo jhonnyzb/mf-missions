@@ -1,0 +1,126 @@
+<div *ngFor="let mission of activeMission" class="missions-card-a__container">
+    <div class="missions-card-a">
+      <div class="missions-card-a__date">
+        <div class="missions-card-a__date-header missions-card-a__date-header--active">
+          <div class="missions-card-a__text-active">
+            <div class="missions-card-a__header-icon">
+              <mat-icon class="material-symbols-outlined">
+                circle
+              </mat-icon>
+            </div>
+            <span class="regular-14 primary">Activa</span>
+          </div>
+          <span class="bold-12 primary uppercase">VENCE {{mission.vencimiento}}</span>
+        </div>
+        <div class="missions-card-a__content">
+          <div class="missions-card-a__icons-a">
+            <div class="missions-card-a__icon-a">
+              <mat-icon *ngIf="mission.missionActivities[0].missionTypeId==1" class="material-symbols-outlined">
+                photo_camera
+              </mat-icon>
+              <mat-icon
+                *ngIf="mission.missionActivities[0].missionTypeId==2 || mission.missionActivities.length > 1"
+                class="material-symbols-outlined">
+                description
+              </mat-icon>
+            </div>
+          </div>
+          <div class="missions-card-a__row">
+            <div class="missions-card-a__data">
+              <div class="bold-16 missions-card-a__text-a">{{mission.name}}</div>
+              <div *ngIf="mission.missionActivities.length == 1">
+                <div *ngIf="mission.missionActivities[0].missionTypeId==1"
+                  class="missions-card-a__text-a regular-14">Misión foto:</div>
+                <div *ngIf="mission.missionActivities[0].missionTypeId==2"
+                  class="missions-card-a__text-a regular-14">Misión encuesta:</div>
+                <div *ngIf="mission.missionActivities[0].missionTypeId==4"
+                  class="missions-card-a__text-a regular-14">Misión audio:</div>
+                <div *ngIf="mission.missionActivities[0].missionTypeId==5"
+                  class="missions-card-a__text-a regular-14">Misión video:</div>
+              </div>
+              <div *ngIf="mission.missionActivities.length > 1">
+                <div class="missions-card-a__text-a regular-14">Misión foto/encuesta:</div>
+              </div>
+              <div class="regular-14 missions-card-a__text-a missions-card-a__text--mb">Gana {{mission.totalAward}}
+                puntos</div>
+              <div class="missions-card-a__content-label">
+                <div
+                  *ngIf="mission.missionActivities.length > 1 && (!mission.participationStatusPhoto || !mission.participationStatusSurvey)"
+                  class="missions-card-a__label missions-card-a__label--pending bold-12 primary">
+                  Actividades pendientes
+                </div>
+                <div
+                  *ngIf="mission.missionActivities.length == 1 && (mission.missionActivities[0].missionTypeId == 2 && !mission.participationStatusSurvey)"
+                  class="missions-card-a__label missions-card-a__label--pending bold-12 primary">
+                  Actividades pendientes
+                </div>
+                <div
+                  *ngIf="mission.missionActivities.length == 1 && (mission.missionActivities[0].missionTypeId == 1 && !mission.participationStatusPhoto)"
+                  class="missions-card-a__label missions-card-a__label--pending bold-12 primary">
+                  Actividades pendientes
+                </div>
+                <div
+                  *ngIf="mission.participationStatusPhoto && mission.participationStatusSurvey"
+                  class="missions-card-a__label missions-card-a__label--width-diferent missions-card-a__label--approved bold-12 primary">
+                  Actividades terminadas
+                </div>
+                <div
+                  *ngIf="mission.missionActivities.length == 1 && (mission.missionActivities[0].missionTypeId == 2 && mission.participationStatusSurvey)"
+                  class="missions-card-a__label missions-card-a__label--approved bold-12 primary">
+                  Actividad terminada
+                </div>
+                <div
+                  *ngIf="mission.missionActivities.length == 1 && (mission.missionActivities[0].missionTypeId == 1 && mission.participationStatusPhoto)"
+                  class="missions-card-a__label missions-card-a__label--approved bold-12 primary">
+                  Actividad terminada
+                </div>
+              </div>
+            </div>
+            <div class="missions-card-a__qualify" *ngIf="mission.missionActivities.length == 1">
+              <div class="missions-card-a__content-label">
+                <button class="bold-16 primary missions-card-a__btn-act" (click)="showMissionDetail(mission, 2, mission.missionActivities.length)" *ngIf="mission.missionActivities[0].missionTypeId == 2">Actividad
+                  <mat-icon class="material-symbols-outlined">
+                    arrow_forward
+                  </mat-icon>
+                </button>
+              </div>
+              <div class="missions-card-a__content-label">
+                <button class="bold-16 primary missions-card-a__btn-act" (click)="showMissionDetail(mission, 0, mission.missionActivities.length)" *ngIf="mission.missionActivities[0].missionTypeId == 1">Actividad
+                  <mat-icon class="material-symbols-outlined">
+                    arrow_forward
+                  </mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="missions-card-a__qualify" *ngIf="mission.missionActivities.length > 1">
+              <div class="missions-card-a__content-label">
+                <div class="missions-card-a__row-label">
+                  <div class="missions-card-a__col-label">
+                    <div class="missions-card-a__text-a bold-14 m-right">
+                      <mat-icon class="missions-card-a__check-icon" *ngIf="mission.missionActivities.length > 1 && mission.participationStatusPhoto">check_circle</mat-icon>Foto </div>
+                    <button class="bold-16 primary missions-card-a__btn-act"
+                      (click)="showMissionDetail(mission, 0, mission.missionActivities.length)">Actividad
+                      <mat-icon class="material-symbols-outlined">
+                        arrow_forward
+                      </mat-icon>
+                    </button>
+                  </div>
+                  <div class="missions-card-a__col-label">
+                    <div class="missions-card-a__text-a bold-14 m-right">
+                      <mat-icon class="missions-card-a__check-icon" *ngIf="mission.missionActivities.length > 1 && mission.participationStatusSurvey">check_circle</mat-icon>Encuesta </div>
+                    <button class="bold-16 primary missions-card-a__btn-act"
+                      (click)="showMissionDetail(mission, 2, mission.missionActivities.length)">Actividad
+                      <mat-icon class="material-symbols-outlined">
+                        arrow_forward
+                      </mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
